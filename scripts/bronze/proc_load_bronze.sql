@@ -1,3 +1,5 @@
+TRUNCATE TABLE crm_cust_info;
+
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/cust_info.csv'
 INTO TABLE bronze.crm_cust_info
 FIELDS TERMINATED BY ','
@@ -16,7 +18,9 @@ IGNORE 1 ROWS
 SET
   cst_id = NULLIF(@cst_id,''),
   cst_create_date = STR_TO_DATE(NULLIF(@cst_create_date,''), '%Y-%m-%d');
-  
+ 
+TRUNCATE TABLE crm_prd_info;
+
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/prd_info.csv'
 INTO TABLE bronze.crm_prd_info
 FIELDS TERMINATED BY ','
@@ -38,6 +42,8 @@ SET
   prd_start_dt = STR_TO_DATE(NULLIF(@prd_start_dt,''), '%Y-%m-%d %H:%i:%s'),
   prd_end_dt   = STR_TO_DATE(NULLIF(@prd_end_dt,''), '%Y-%m-%d %H:%i:%s');
   
+TRUNCATE TABLE crm_sales_details;
+
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/sales_details.csv'
 INTO TABLE bronze.crm_sales_details
 FIELDS TERMINATED BY ','
@@ -63,6 +69,8 @@ SET
   sls_sales    = NULLIF(@sls_sales,''),
   sls_quantity = NULLIF(@sls_quantity,''),
   sls_price    = NULLIF(@sls_price,'');
+  
+TRUNCATE TABLE erp_cust_az12;
 
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/cust_az12.csv'
 INTO TABLE bronze.erp_cust_az12
@@ -80,6 +88,8 @@ SET
     bdate = STR_TO_DATE(NULLIF(@bdate,''), '%Y-%m-%d'),
     gen  = NULLIF(@gen,'');
 
+TRUNCATE TABLE erp_loc_a101;
+
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/loc_a101.csv'
 INTO TABLE bronze.erp_loc_a101
 FIELDS TERMINATED BY ','
@@ -93,6 +103,8 @@ IGNORE 1 ROWS
 SET
   cid   = NULLIF(@cid,''),
   cntry = NULLIF(@cntry,'');
+
+TRUNCATE TABLE erp_px_cat_g1v2;
   
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/px_cat_g1v2.csv'
 INTO TABLE bronze.erp_px_cat_g1v2
