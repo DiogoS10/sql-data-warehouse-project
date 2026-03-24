@@ -82,6 +82,20 @@ WHERE prd_end_dt < prd_start_dt;
 -- ====================================================================
 -- Checking 'silver.crm_sales_details'
 -- ====================================================================
+-- Check for Foreign keys invalids - verify if exist a FK that doesnt exist in the their table. For example if a client isnt registered in the client table and makes a order
+-- Expectation: No Results
+SELECT 
+    * 
+FROM silver.crm_sales_details
+WHERE sls_prd_key NOT IN 
+    (SELECT prd_key FROM silver.crm_prd_info)
+-- OR
+SELECT *
+FROM crm_sales_details s
+LEFT JOIN crm_cust_info p
+ON s.sls_cust_id = p.cst_id
+WHERE p.cst_id IS NULL
+
 -- Check for Invalid Dates
 -- Expectation: No Invalid Dates
 SELECT 
