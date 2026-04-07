@@ -79,6 +79,8 @@ FROM bronze.crm_prd_info;
 
 -- Loading silver.crm_sales_details
 
+TRUNCATE TABLE silver.crm_sales_details;
+
 INSERT INTO silver.crm_sales_details (
 			sls_ord_num,
 			sls_prd_key,
@@ -121,6 +123,8 @@ INSERT INTO silver.crm_sales_details (
 
 -- Loading silver.erp_cust_az12
 
+TRUNCATE TABLE silver.erp_cust_az12;
+
 INSERT INTO silver.erp_cust_az12 (
 			cid,
             bdate,
@@ -144,6 +148,8 @@ INSERT INTO silver.erp_cust_az12 (
 
 -- Loading silver.erp_loc_a101
 
+TRUNCATE TABLE silver.erp_loc_a101;
+
 INSERT INTO silver.erp_loc_a101 (
 			cid,
             cntry
@@ -159,6 +165,8 @@ INSERT INTO silver.erp_loc_a101 (
 		FROM bronze.erp_loc_a101;
 
 -- Loading silver.erp_px_cat_g1v2
+
+TRUNCATE TABLE silver.erp_px_cat_g1v2;
 
 INSERT INTO silver.erp_px_cat_g1v2 (
 			id,
