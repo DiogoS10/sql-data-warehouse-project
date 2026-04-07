@@ -133,6 +133,20 @@ ORDER BY sls_sales, sls_quantity, sls_price;
 -- ====================================================================
 -- Checking 'silver.erp_cust_az12'
 -- ====================================================================
+-- Check for unmtached data with other table after treat the primarykey
+SELECT
+	cid,
+    CASE 
+		WHEN cid LIKE 'NAS%' THEN substring(TRIM(cid), 4, length(cid))
+		ELSE cid
+    END cid,
+    bdate,
+    gen
+FROM bronze.erp_cust_az12
+WHERE CASE 
+		WHEN cid LIKE 'NAS%' THEN substring(TRIM(cid), 4, length(cid))
+		ELSE cid
+    END NOT IN (select DISTINCT cst_key from silver.crm_cust_info);
 -- Identify Out-of-Range Dates
 -- Expectation: Birthdates between 1924-01-01 and Today
 SELECT DISTINCT 
