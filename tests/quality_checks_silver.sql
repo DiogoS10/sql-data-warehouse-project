@@ -163,6 +163,13 @@ FROM silver.erp_cust_az12;
 -- ====================================================================
 -- Checking 'silver.erp_loc_a101'
 -- ====================================================================
+-- Check for unmtached data with other table after treat the primarykey
+SELECT 
+    REPLACE(cid, '-', '') as cid,
+    cntry
+FROM bronze.erp_loc_a101
+WHERE REPLACE(cid, '-', '') not in (select DISTINCT cst_key from silver.crm_cust_info);
+
 -- Data Standardization & Consistency
 SELECT DISTINCT 
     cntry 
